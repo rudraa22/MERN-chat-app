@@ -12,6 +12,8 @@ app.use(cors());
 app.use(express.json());
 const authRoutes = require('../backend/routes/authRoutes');
 app.use('/api/auth' , authRoutes);
+const chatRoutes = require('./routes/chatRoutes');
+app.use('/api/chats', chatRoutes);
 
 app.get('/' , (req,res) => {
     res.send('Chat app is running...');
@@ -39,5 +41,5 @@ mongoose.connect(process.env.MONGO_URI)
 const PORT = process.env.port || 5000;
 
 server.listen(PORT , () => { 
-    console.log(`Server running on {PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
