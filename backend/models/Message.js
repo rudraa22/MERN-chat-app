@@ -1,10 +1,10 @@
-const mongoose = require('moongoose');
+const mongoose = require('mongoose');
 const messageSchema = new mongoose.Schema(
     {
         sender: {
-            type: mongoose.Schema.Types.ObjectId,
-            red: 'User',
-            required: true
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',        
+        required: true
         },
         content: {
             type: String,
@@ -25,7 +25,7 @@ const messageSchema = new mongoose.Schema(
 
         readyBy: [
             {
-                type: mongoose.Schema.Type.ObjectId,
+                type: mongoose.Schema.Types.ObjectId,
                 ref: 'User'
             },
         ],
@@ -35,5 +35,5 @@ const messageSchema = new mongoose.Schema(
         }
 );
 
-const Mongoose = mongoose.model('Message' , messageSchema);
-module.exports = Message;
+const Message = mongoose.model('Message', messageSchema);
+module.exports = Message;module.exports = Message;

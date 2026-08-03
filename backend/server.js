@@ -14,6 +14,8 @@ const authRoutes = require('../backend/routes/authRoutes');
 app.use('/api/auth' , authRoutes);
 const chatRoutes = require('./routes/chatRoutes');
 app.use('/api/chats', chatRoutes);
+const messageRoutes = require('./routes/messageRoutes');
+app.use('/api/messages', messageRoutes);
 
 app.get('/' , (req,res) => {
     res.send('Chat app is running...');
