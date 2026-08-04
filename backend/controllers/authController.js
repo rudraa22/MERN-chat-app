@@ -80,4 +80,23 @@ const getMe = async (req, res) => {
     res.status(200).json(req.user);
 };
 
-module.exports = { signup, login, getMe };
+const searchUsers = async (req, res) => {
+    try {
+        const keyword = req.query.search
+            ? {
+                  $or: [
+                      { name: { $regex: req.query.search, $options: 'i' } },
+                      { email: { $regex: req.query.search, $options: 'i' } },
+                  ],
+              }
+            : {};
+
+        const users = await User.find(keyword).find({ _id: { $ne: req.user._id } }).select('-password');
+        res.status(200).json(users);
+    } catch (error) {
+        console.error('Search users error', error);
+        res.status(500).json({ message: 'Server error searching users' });
+    }
+};
+
+module.exports = { signup, login, getMe, searchUsers };

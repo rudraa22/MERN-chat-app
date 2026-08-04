@@ -16,6 +16,9 @@ const chatRoutes = require('./routes/chatRoutes');
 app.use('/api/chats', chatRoutes);
 const messageRoutes = require('./routes/messageRoutes');
 app.use('/api/messages', messageRoutes);
+const { searchUsers } = require('./controllers/authController');
+const { protect } = require('./middleware/authMiddleware');
+app.get('/api/users', protect, searchUsers);
 
 app.get('/' , (req,res) => {
     res.send('Chat app is running...');
